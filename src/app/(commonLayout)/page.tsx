@@ -1,3 +1,4 @@
+import AboutSection from "@/components/about";
 import AboutMe from "@/components/views/AboutMe";
 import Banner from "@/components/views/Banner";
 import ContactMe from "@/components/views/ContactMe";
@@ -9,11 +10,9 @@ import MySkills from "@/components/views/MySkills";
 export default async function Home() {
   return (
     <div className="container mx-auto">
-      <div className="flex flex-col lg:flex-row">
         <Banner />
-        {/* <RobotAnimation2 /> */}
-      </div>
-      <AboutMe />
+      <AboutSection />
+
       <MySkills />
       <MyEducation />
       <MyProjects />

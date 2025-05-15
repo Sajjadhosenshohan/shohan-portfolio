@@ -5,15 +5,22 @@ import Navbar from "@/components/shared/Navbar";
 import { Toaster } from "sonner";
 // import { authOptions } from "../utils/authOptions";
 
-const CommonLayout = async({ children }: { children: React.ReactNode }) => {
+const CommonLayout = async ({ children }: { children: React.ReactNode }) => {
   // const session = await getServerSession(authOptions);
 
   return (
     <div className="w-full">
       {/* <Menubar /> */}
-      <Navbar/>
-      <div className="min-h-screen mt-20 ">{children}<Toaster /></div>
-      <Footer />
+      <div className="container mx-auto">
+        <Navbar />
+      </div>
+      <div className="min-h-screen mt-20 ">
+        {children}
+        <Toaster />
+      </div>
+      <div className="container mx-auto">
+        <Footer />
+      </div>
     </div>
   );
 };

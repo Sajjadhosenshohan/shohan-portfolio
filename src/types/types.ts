@@ -35,3 +35,11 @@ export interface TMessage {
   subject: string;
   message: string;
 }
+
+export interface SkillData {
+  id: string;
+  name: string;
+  iconPath: string; // Path relative to the public folder e.g., /icons/javascript.png
+  color?: string;
+  description: string;
+}

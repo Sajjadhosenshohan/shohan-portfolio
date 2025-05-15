@@ -1,23 +1,24 @@
 import AboutSection from "@/components/about";
-import AboutMe from "@/components/views/AboutMe";
+import EducationSection from "@/components/education";
+import SectionToSectionLine from "@/components/shared/SectionToSectionLine";
+import SkillsSection from "@/components/skills/SkillSection";
 import Banner from "@/components/views/Banner";
-import ContactMe from "@/components/views/ContactMe";
-import MyEducation from "@/components/views/MyEducation";
-import MyProjects from "@/components/views/MyProjects";
-import MySkills from "@/components/views/MySkills";
-// import RobotAnimation2 from "@/components/views/RobotAnimation2";
+import ContactPage from "./contact/page";
 
 export default async function Home() {
   return (
     <div className="container mx-auto">
-        <Banner />
+      <Banner />
+      <SectionToSectionLine />
       <AboutSection />
+      <SkillsSection />
+      <SectionToSectionLine />
+      <EducationSection />
 
-      <MySkills />
-      <MyEducation />
-      <MyProjects />
-
-      <ContactMe />
+      {/* <MyEducation />
+      <MyProjects /> */}
+      <SectionToSectionLine />
+      <ContactPage />
     </div>
   );
 }

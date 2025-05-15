@@ -9,6 +9,7 @@ const AboutSection = () => {
       {/* <h2 className="text-6xl md:text-8xl font-bold text-gray-800 text-center opacity-20 absolute top-0 left-0 right-0">
         ABOUT ME
       </h2> */}
+
       <Heading heading="ABOUT ME"/>
 
       <div className="flex  flex-col md:flex-row justify-between  gap-5">
@@ -95,6 +96,14 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
+
+      <Image
+        src="/AllSvg/section.svg"
+        alt="Background"
+        fill
+        className="object-cover absolute top-0 left-60 z-[-10]"
+        priority
+      />
     </section>
   );
 };

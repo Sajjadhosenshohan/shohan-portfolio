@@ -4,11 +4,14 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "http",
+        hostname: "**", // Allows any hostname over HTTP
+      },
+      {
         protocol: "https",
-        hostname: "**",
+        hostname: "**", // Allows any hostname over HTTPS
       },
     ],
-    domains: ["res.cloudinary.com"],
   },
 };
 

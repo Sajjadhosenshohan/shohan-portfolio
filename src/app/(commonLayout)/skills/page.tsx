@@ -333,7 +333,7 @@
 //   );
 // }
 
-import SkillsKeyboard from '@/components/skills/Keyboard'
+import SkillsKeyboard from '@/components/skills/SkillSection'
 import React from 'react'
 
 const SkillsPage = () => {

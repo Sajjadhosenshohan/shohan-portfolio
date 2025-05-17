@@ -1,9 +1,9 @@
 import AboutSection from "@/components/about";
 import EducationSection from "@/components/education";
 import SectionToSectionLine from "@/components/shared/SectionToSectionLine";
-import SkillsSection from "@/components/skills/SkillSection";
 import Banner from "@/components/views/Banner";
 import ContactPage from "./contact/page";
+import SkillsSection from "@/components/skills/SkillSection";
 
 export default async function Home() {
   return (
@@ -11,7 +11,10 @@ export default async function Home() {
       <Banner />
       <SectionToSectionLine />
       <AboutSection />
+
+      <SectionToSectionLine />
       <SkillsSection />
+      
       <SectionToSectionLine />
       <EducationSection />
 

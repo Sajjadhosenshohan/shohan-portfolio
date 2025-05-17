@@ -61,11 +61,11 @@ export function SkillKey({ position, skill, index }: SkillKeyProps) {
           console.log(`Clicked on ${skill.name}`)
         }}
       >
-        <boxGeometry args={[1, 0.3, 1]} />
+        <boxGeometry args={[0.8, 0.3, 0.8]} />
         <meshStandardMaterial color={skill.color} />
 
         {/* Icon on top of the key */}
-        <Html position={[0, 0.2, 0]} center distanceFactor={10} zIndexRange={[100, 0]}>
+        <Html position={[0, 0.2, 0]} center distanceFactor={7} zIndexRange={[50, 0]}>
           <div
             className="w-10 h-10 rounded-full flex items-center justify-center"
             style={{

@@ -5,6 +5,7 @@ import "aos/dist/aos.css";
 import SocialIcons from "../SocialIcons/SocialIcons";
 import { useEffect } from "react";
 import Image from "next/image";
+import CommonSection from "../shared/CommonSection";
 
 const Banner = () => {
   useEffect(() => {
@@ -12,18 +13,18 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative w-full lg:min-h-screen overflow-hidden">
+     <CommonSection>
       {/* Background SVG */}
-       <Image
-    src="/AllSvg/section.svg"
-    alt="Hero"
-    fill
-    className="object-cover absolute top-0 left-60 z-[-10]"
-    priority
-  />
+      <Image
+        src="/AllSvg/section.svg"
+        alt="Hero"
+        fill
+        className="object-cover absolute top-0 left-60 z-[-10]"
+        priority
+      />
 
       {/* Banner Content */}
-      <div className="container mx-auto flex flex-col justify-between md:flex-row gap-10  items-center  lg:h-auto overflow-hidden px-8 pt-28 ">
+      <div className="container mx-auto flex flex-col justify-between md:flex-row gap-10  items-center  lg:h-auto overflow-hidden px-8 py-14 md:py-20">
         {/* About Me Text Section */}
         <div className="text-center md:text-left max-w-4xl">
           <h3
@@ -36,7 +37,6 @@ const Banner = () => {
           <h1
             data-aos="fade-left"
             data-aos-duration="1000"
-            
             className="text-2xl md:text-3xl lg:text-4xl font-semibold py-3 xl:py-5"
           >
             MD. SAJJAD HOSEN SHOHAN
@@ -56,8 +56,8 @@ const Banner = () => {
                 ]}
                 loop={true}
                 cursor
-                cursorStyle="_"
-                cursorColor="#2196F3"
+                cursorStyle="#"
+                cursorColor="var(--accent)"
               />
             </span>
           </h3>
@@ -108,7 +108,7 @@ const Banner = () => {
           ></iframe>
         </div>
       </div>
-    </div>
+     </CommonSection>
   );
 };
 

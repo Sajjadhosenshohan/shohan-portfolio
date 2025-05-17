@@ -43,3 +43,23 @@ export interface SkillData {
   color?: string;
   description: string;
 }
+
+
+// Project data structure
+export type ProjectFeature = string;
+
+export interface ProjectTech {
+  name: string;
+  icon: React.ReactNode;
+}
+export interface Project {
+  id: string;
+  name: string;
+  description: string;
+  features: ProjectFeature[];
+  image: string;
+  tech: ProjectTech[];
+  githubFrontend: string;
+  githubBackend?: string;
+  live: string;
+}

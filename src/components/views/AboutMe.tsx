@@ -14,15 +14,15 @@ const AboutMe = () => {
       <div className=" mx-auto px-5 lg:px-20 py-20 lg:min-h-screen flex flex-col justify-evenly items-center">
         <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center">
           <div
-            // data-aos-duration="1000"
-            // data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos="fade-right"
             className="w-full lg:w-1/2"
           >
             <div className=" w-[100%] lg:w-[70%] pb-8 md:pb-0 rounded-xl bg-transparent flex justify-center items-center flex-col gap-5 text-white">
               <div className="">
                 <div className=" h-72 w-72 pt-5  p-4">
                   <Image
-                    className="rounded-full"
+                    className="rounded-full object-center object-fit"
                     src={profileImage}
                     alt="Humayun"
                     height={600}

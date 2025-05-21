@@ -6,18 +6,9 @@ import CommonSection from "../shared/CommonSection";
 
 const AboutSection = () => {
   return (
-   <CommonSection>
+    <CommonSection>
       <div className="text-center mb-5 md:mb-10 lg:mb-16">
-
         <Heading heading="ABOUT ME" />
-
-        <Image
-          src="/AllSvg/section.svg"
-          alt="Background"
-          fill
-          className="object-cover absolute top-0 left-60 z-[-10]"
-          priority
-        />
       </div>
 
       <div className="flex  flex-col md:flex-row justify-between  gap-5">
@@ -27,13 +18,14 @@ const AboutSection = () => {
           <div className="w-full h-[400px] rounded-2xl overflow-hidden relative">
             <Image
               src="/myimage.png"
-              fill
+              height={350}
+              width={400}
               alt="Image"
               className="object-cover"
             />
 
             {/* Floating Buttons — Now placed inside the same container */}
-            <button className="absolute bottom-4 left-4 py-2 px-6 rounded-3xl bg-orange-600 text-white text-sm shadow-lg animate-bounce">
+            <button className="absolute bottom-4 left-4 py-2 px-6 rounded-3xl bg-[var(--primary)] text-white text-sm shadow-lg animate-bounce">
               Coder
             </button>
 
@@ -66,10 +58,9 @@ const AboutSection = () => {
             <span className="text-center px-2 md:px-4 py-1 md:py-2 bg-[var(--secondary)] text-sm font-semibold rounded-full text-[var(--primary)]">
               Frontend Development
             </span>
-            <span className="text-center px-2 md:px-4 py-1 md:py-2 bg-green-100 text-sm font-semibold rounded-full text-green-800/80">
+            <span className="text-center px-2 md:px-4 py-1 md:py-2 bg-[var(--accent-secondary)] text-sm font-semibold rounded-full text-[var(--accent)]">
               Backend Development
             </span>
-            
           </div>
         </div>
       </div>

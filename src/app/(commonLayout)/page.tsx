@@ -1,26 +1,22 @@
 import AboutSection from "@/components/about";
 import EducationSection from "@/components/education";
-import SectionToSectionLine from "@/components/shared/SectionToSectionLine";
 import Banner from "@/components/views/Banner";
 import ContactPage from "./contact/page";
 import SkillsSection from "@/components/skills/SkillSection";
+import ProjectSection from "@/components/projects";
+import BlogSection from "@/components/blogs";
 
 export default async function Home() {
   return (
-    <div className="container mx-auto">
+    <div className="space-y-10">
       <Banner />
-      <SectionToSectionLine />
       <AboutSection />
 
-      <SectionToSectionLine />
       <SkillsSection />
       
-      <SectionToSectionLine />
+      <ProjectSection/>
       <EducationSection />
-
-      {/* <MyEducation />
-      <MyProjects /> */}
-      <SectionToSectionLine />
+      <BlogSection/>
       <ContactPage />
     </div>
   );

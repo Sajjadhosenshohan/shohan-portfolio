@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import type React from "react";
@@ -14,9 +15,9 @@ import {
   FaPaperPlane,
 } from "react-icons/fa";
 import CommonSection from "../shared/CommonSection";
-import Image from "next/image";
 import Heading from "../shared/Heading";
 import { MagicCard } from "../magicui/magic-card";
+import { sendMessage } from "@/services/GetAllService";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -29,6 +30,7 @@ const ContactSection = () => {
   const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(
     null
   );
+  const [submitMessage, setSubmitMessage] = useState<null | string>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -43,16 +45,24 @@ const ContactSection = () => {
 
     // Simulate form submission
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setSubmitStatus("success");
+      const response = await sendMessage(formData);
+      if (response?.success) {
+        setSubmitStatus("success");
+        setSubmitMessage("Message sent successfully!");
+        setIsSubmitting(false);
+      } else {
+        setSubmitStatus("error");
+        setSubmitMessage("Failed to send message. Please try again.");
+        setIsSubmitting(false);
+      }
+
       // Reset form after successful submission
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      setSubmitStatus("error");
-    } finally {
       setIsSubmitting(false);
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus(null), 3000);
+      setSubmitStatus("error");
+      setIsSubmitting(false);
+      setSubmitMessage("Failed to send message. Please try again.");
     }
   };
 
@@ -60,39 +70,23 @@ const ContactSection = () => {
     <CommonSection>
       <div className="text-center mb-16">
         <Heading heading="GET IN TOUCH" />
-        <Image
-          src="/AllSvg/section.svg"
-          alt="Background"
-          fill
-          className="object-cover absolute top-0 left-60 z-[-10]"
-          priority
-        />
       </div>
 
       <div className="relative">
         {/* Main Contact Card */}
         <MagicCard
-          className="w-full rounded-3xl overflow-hidden p-[1px]"
-          spotlight
-          glare
-          glareSize={100}
+          className="w-full p-[1px] rounded-3xl overflow-hidden"
           gradientOpacity={0}
-          glarePosition="all"
-          glareBorderRadius="100%"
-          glareColor="hsl(0 0% 100% / 0.3)"
-          borderColor="hsl(var(--primary) / 0.2)"
-          spotlightColor="hsl(var(--primary) / 0.1)"
-          background="radial-gradient(circle at center, rgba(147, 51, 234, 0.1), rgba(0, 0, 0, 0))"
         >
           <div className="w-full  backdrop-blur-md border  p-8 rounded-3xl">
             <div className="grid md:grid-cols-2 gap-10">
               {/* Left Side - Contact Info & Social */}
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
+                  <h2 className="text-3xl font-bold mb-6">
                     Let&apos;s Connect
                   </h2>
-                  <p className="text-gray-300 mb-8">
+                  <p className=" mb-8">
                     Have a project in mind or just want to say hello? Feel free
                     to reach out!
                   </p>
@@ -100,12 +94,12 @@ const ContactSection = () => {
                   {/* Contact Info */}
                   <div className="space-y-4">
                     <div className="flex items-center gap-4 group">
-                      <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg shadow-purple-500/20 group-hover:shadow-purple-500/40 transition-all duration-300">
+                      <div className="p-3 bg-gradient-to-br from-purple-500 bg-primary rounded-xl shadow-lg shadow-purple-500/20 group-hover:shadow-purple-500/40 transition-all duration-300">
                         <FaEnvelope />
                       </div>
                       <div>
                         <p className="text-xs ">Email</p>
-                        <p className="text-sm  group-hover:text-purple-300 transition-colors">
+                        <p className="text-sm   transition-colors">
                           mdshohansajjad@gmail.com
                         </p>
                       </div>
@@ -117,7 +111,7 @@ const ContactSection = () => {
                       </div>
                       <div>
                         <p className="text-xs ">Location</p>
-                        <p className="text-sm group-hover:text-pink-300 transition-colors">
+                        <p className="text-sm transition-colors">
                           Rangpur, Bangladesh
                         </p>
                       </div>
@@ -129,7 +123,7 @@ const ContactSection = () => {
                       </div>
                       <div>
                         <p className="text-xs ">Availability</p>
-                        <p className="text-sm  group-hover:text-green-300 transition-colors">
+                        <p className="text-sm   transition-colors">
                           Open to opportunities
                         </p>
                       </div>
@@ -143,36 +137,24 @@ const ContactSection = () => {
                     Connect with me
                   </h3>
                   <div className="flex flex-wrap gap-3">
+                    
                     <a
-                      href="#"
-                      className="p-3 bg-[#EA4335]/20 hover:bg-[#EA4335]/30 text-[#EA4335] rounded-xl transition-all duration-300 hover:scale-110"
-                      aria-label="Email"
-                    >
-                      <FaEnvelope />
-                    </a>
-                    <a
-                      href="#"
+                      href="https://github.com/Sajjadhosenshohan"
                       className="p-3 bg-[#333]/20 hover:bg-[#333]/30  rounded-xl transition-all duration-300 hover:scale-110"
                       aria-label="GitHub"
                     >
                       <FaGithub />
                     </a>
                     <a
-                      href="#"
+                      href="https://www.linkedin.com/in/sajjadhosenshohan"
                       className="p-3 bg-[#0A66C2]/20 hover:bg-[#0A66C2]/30 text-[#0A66C2] rounded-xl transition-all duration-300 hover:scale-110"
                       aria-label="LinkedIn"
                     >
                       <FaLinkedin />
                     </a>
+                    
                     <a
-                      href="#"
-                      className="p-3 bg-[#1DA1F2]/20 hover:bg-[#1DA1F2]/30 text-[#1DA1F2] rounded-xl transition-all duration-300 hover:scale-110"
-                      aria-label="Twitter"
-                    >
-                      <FaTwitter />
-                    </a>
-                    <a
-                      href="#"
+                      href="https://www.instagram.com/shohansajj"
                       className="p-3 bg-[#C13584]/20 hover:bg-[#C13584]/30 text-[#C13584] rounded-xl transition-all duration-300 hover:scale-110"
                       aria-label="Instagram"
                     >
@@ -189,7 +171,7 @@ const ContactSection = () => {
 
                 <div className="relative  backdrop-blur-lg rounded-2xl p-6 border border-white/10">
                   <h2 className="text-2xl font-bold  mb-6 flex items-center gap-2">
-                    <FaPaperPlane className="text-purple-400" /> Send a Message
+                    <FaPaperPlane className="text-accent" /> Send a Message
                   </h2>
 
                   <form onSubmit={handleSubmit} className="space-y-5">
@@ -205,7 +187,7 @@ const ContactSection = () => {
                         onChange={handleChange}
                         placeholder="Your name"
                         required
-                        className="w-full  border border-white/10 rounded-lg py-3 px-4  placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition"
+                        className="w-full  border border-white/10 rounded-lg py-3 px-4  placeholder:text-gray-500 focus:outline-none ring-2 ring-accent/40 focus:ring-2 focus:ring-accent focus:border-transparent transition"
                       />
                     </div>
 
@@ -221,7 +203,7 @@ const ContactSection = () => {
                         onChange={handleChange}
                         placeholder="your.email@example.com"
                         required
-                        className="w-full  border border-white/10 rounded-lg py-3 px-4  placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition"
+                        className="w-full  border border-white/10 rounded-lg py-3 px-4  placeholder:text-gray-500 focus:outline-none ring-2 ring-accent/40 focus:ring-2 focus:ring-accent focus:border-transparent transition"
                       />
                     </div>
 
@@ -237,7 +219,7 @@ const ContactSection = () => {
                         placeholder="Write your message here..."
                         required
                         rows={4}
-                        className="w-full  border border-white/10 rounded-lg py-3 px-4  placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-transparent transition"
+                        className="w-full  border border-white/10 rounded-lg py-3 px-4  placeholder:text-gray-500 focus:outline-none ring-2 ring-accent/40 focus:ring-2 focus:ring-accent focus:border-transparent transition"
                       ></textarea>
                     </div>
 
@@ -247,7 +229,7 @@ const ContactSection = () => {
                       // className="bg-[var(--accent)] cursor-pointer text-white rounded-full hover:scale-105 duration-300 px-5 py-2 font-bold"
                       type="submit"
                       disabled={isSubmitting}
-                      className={`w-full py-3 px-6 bg-[var(--accent)] rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer ${
+                      className={`w-full text-white py-3 px-6 bg-[var(--accent)] rounded-lg font-medium flex items-center justify-center gap-2 transition-all duration-300 cursor-pointer ${
                         isSubmitting
                           ? "cursor-not-allowed"
                           : " hover:shadow-lg hover:shadow-purple-500/20"
@@ -286,13 +268,14 @@ const ContactSection = () => {
 
                     {submitStatus === "success" && (
                       <div className="bg-green-500/20 border border-green-500/30 text-green-300 p-3 rounded-lg text-center">
-                        Message sent successfully!
+                        {submitMessage || "Message sent successfully!"}
                       </div>
                     )}
 
                     {submitStatus === "error" && (
                       <div className="bg-red-500/20 border border-red-500/30 text-red-300 p-3 rounded-lg text-center">
-                        Failed to send message. Please try again.
+                        {submitMessage ||
+                          "Failed to send message. Please try again."}
                       </div>
                     )}
                   </form>

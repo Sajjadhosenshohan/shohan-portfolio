@@ -1,65 +1,59 @@
-export interface TBlog {
-  _id: string;
-  title: string;
-  short_description: string;
-  long_description: string;
-  image: string;
-  author: {
-    email: string;
-    image: string;
-    name: string;
-  };
-}
-export interface TProject {
-  _id: string;
-  title: string;
-  live_link: string;
-  client_link: string;
-  server_link: string;
-  short_description: string;
-  long_description: string;
-  technology: string;
-  image: string;
-  author: {
-    email: string;
-    image: string;
-    name: string;
-  };
-}
 
-export interface TMessage {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
-}
-
-export interface SkillData {
+export interface TSkill {
   id: string;
   name: string;
-  iconPath: string; // Path relative to the public folder e.g., /icons/javascript.png
-  color?: string;
-  description: string;
+  category: string;
+  image?: string;
+  createdAt: string;
+  updatedAt: string
 }
 
-
-// Project data structure
-export type ProjectFeature = string;
-
-export interface ProjectTech {
+type TTechnology ={
+  // id: string;
   name: string;
-  icon: React.ReactNode;
+  icon?: string;
 }
-export interface Project {
+export type TProject = {
   id: string;
-  name: string;
+  title: string;
   description: string;
-  features: ProjectFeature[];
-  image: string;
-  tech: ProjectTech[];
-  githubFrontend: string;
-  githubBackend?: string;
-  live: string;
-}
+  features?: string[];
+  project_image?: string | null;
+  client_link?: string;
+  server_link?: string;
+  live_link?: string;
+  technologies?: TTechnology[];
+  authorId?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+
+export type TBlog = {
+  id: string;
+  title: string;
+  short_description: string;
+  blog_image?: string | null;
+  status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
+  publishDate?: Date;
+  tags?: string[];
+  author: {
+    name: string;
+    email:string;
+    profile_image?: string | null;
+  }
+  authorId?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+
+  export type TResume = {
+    createdAt: string;
+    id: string;
+    isActive: true;
+    pdfUrl: string;
+    publicId: null;
+    title: string;
+    updatedAt: string;
+  };

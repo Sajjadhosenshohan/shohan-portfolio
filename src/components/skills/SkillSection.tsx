@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import CommonSection from "@/components/shared/CommonSection"
 import Heading from "@/components/shared/Heading"
 import Image from "next/image"
@@ -29,12 +29,17 @@ export default function SkillsSection() {
     
     fetchSkills()
   }, [])
-  if (!mounted) return <LoadingPage/>
-
-  const filters =  ["All","Frontend", "Backend", "Database", "Tools", "Other"];
+  // Derive unique categories dynamically from the fetched skills data
+  const filters = useMemo(() => {
+    const categories = skills?.map((skill) => skill.category) || [];
+    const uniqueCategories = [...new Set(categories)];
+    return ["All", ...uniqueCategories];
+  }, [skills]);
 
   // Filter skills based on selected category
-  const filteredSkills = filter === "All" ? skills : skills?.filter((skill) => skill.category === filter)
+  const filteredSkills = filter === "All" ? skills : skills?.filter((skill) => skill.category === filter);
+
+  if (!mounted) return <LoadingPage/>;
 
   return (
     <CommonSection>

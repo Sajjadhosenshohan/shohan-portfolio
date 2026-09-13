@@ -11,6 +11,14 @@ import ProjectCard from "./ProjectCard"
 import { motion, AnimatePresence } from "framer-motion"
 import { MagicCard } from "../magicui/magic-card"
 
+// Helper to extract YouTube video ID
+function getYouTubeId(url: string): string | null {
+  const match = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/
+  )
+  return match ? match[1] : null
+}
+
 const ProjectSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [activeProject, setActiveProject] = useState<TProject | null>(null)
@@ -91,7 +99,7 @@ const ProjectSection = () => {
         </div>
       </div>
 
-      {/* Modal - Simplified like blog section */}
+      {/* Modal */}
       <AnimatePresence>
         {isModalOpen && activeProject && (
           <motion.div
@@ -137,10 +145,34 @@ const ProjectSection = () => {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
                   />
                 </div>
-                {/* Links */}
-                  <div className="flex flex-wrap gap-3 mt-6 p-6">
+
+                {/* Video embed - only show if video_url exists */}
+                {activeProject?.video_url && (
+                  <div className="p-6 pb-0">
+                    {getYouTubeId(activeProject.video_url) ? (
+                      <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${getYouTubeId(activeProject.video_url)}`}
+                          title="Project Video"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full"
+                        />
+                      </div>
+                    ) : (
+                      <video
+                        src={activeProject.video_url}
+                        controls
+                        className="w-full rounded-lg"
+                      />
+                    )}
+                  </div>
+                )}
+
+                {/* Links - only show links that exist */}
+                <div className="flex flex-wrap gap-3 mt-6 p-6">
+                  {activeProject?.client_link && (
                     <a
-                      href={activeProject?.client_link}
+                      href={activeProject.client_link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-md"
@@ -152,25 +184,27 @@ const ProjectSection = () => {
                       <Code2 className="h-4 w-4" />
                       Frontend Code
                     </a>
+                  )}
 
-                    {activeProject?.server_link && (
-                      <a
-                        href={activeProject?.server_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-md"
-                        style={{
-                          background: "rgba(162, 89, 255, 0.1)",
-                          color: "#a259ff",
-                        }}
-                      >
-                        <Server className="h-4 w-4" />
-                        Backend Code
-                      </a>
-                    )}
-
+                  {activeProject?.server_link && (
                     <a
-                      href={activeProject?.live_link}
+                      href={activeProject.server_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-md"
+                      style={{
+                        background: "rgba(162, 89, 255, 0.1)",
+                        color: "#a259ff",
+                      }}
+                    >
+                      <Server className="h-4 w-4" />
+                      Backend Code
+                    </a>
+                  )}
+
+                  {activeProject?.live_link && (
+                    <a
+                      href={activeProject.live_link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-md ml-auto"
@@ -182,7 +216,8 @@ const ProjectSection = () => {
                       <ExternalLink className="h-4 w-4" />
                       View Live Demo
                     </a>
-                  </div>
+                  )}
+                </div>
 
                 <div className="p-6">
                   {/* Title */}
@@ -197,12 +232,29 @@ const ProjectSection = () => {
                     {activeProject?.title}
                   </h2>
 
+                  {/* Project Tags */}
+                  {activeProject?.tags && activeProject.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {activeProject.tags.map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-block text-xs md:text-sm px-3 py-1 rounded-full font-medium"
+                          style={{
+                            background: "rgba(59, 130, 246, 0.1)",
+                            border: "1px solid rgba(59, 130, 246, 0.3)",
+                            color: "#3b82f6",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
                   {/* Description */}
                   <p className="text-base leading-relaxed mb-6 opacity-90">{activeProject?.description}</p>
 
-                  
-
-                  {/* Features Section - Simplified */}
+                  {/* Features Section */}
                   {activeProject?.features && activeProject.features.length > 0 && (
                     <div className="mb-6">
                       <h3 className="text-lg font-medium mb-3 " >
@@ -227,7 +279,7 @@ const ProjectSection = () => {
                     </div>
                   )}
 
-                  {/* Technologies - Similar to blog tags */}
+                  {/* Technologies */}
                   {activeProject?.technologies && activeProject.technologies.length > 0 && (
                     <div className="mb-6 pt-4 border-t">
                       <div className="flex items-center gap-2 mb-3 text-sm font-medium" >

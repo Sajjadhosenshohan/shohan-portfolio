@@ -4,6 +4,7 @@ export interface TSkill {
   name: string;
   category: string;
   image?: string;
+  sortOrder?: number;
   createdAt: string;
   updatedAt: string
 }
@@ -22,6 +23,9 @@ export type TProject = {
   client_link?: string;
   server_link?: string;
   live_link?: string;
+  video_url?: string;
+  tags?: string[];
+  sortOrder?: number;
   technologies?: TTechnology[];
   authorId?: string;
   createdAt: string;
@@ -37,6 +41,8 @@ export type TBlog = {
   status: "DRAFT" | "PUBLISHED" | "ARCHIVED";
   publishDate?: Date;
   tags?: string[];
+  video_url?: string;
+  sortOrder?: number;
   author: {
     name: string;
     email:string;
@@ -54,6 +60,7 @@ export type TBlog = {
     isActive: true;
     pdfUrl: string;
     publicId: null;
+    sortOrder?: number;
     title: string;
     updatedAt: string;
   };

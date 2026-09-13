@@ -97,7 +97,7 @@ const Banner = () => {
 
           {/* Buttons */}
           <div className="pt-8 flex gap-4">
-            {filterResume.length > 0 && (
+            {filterResume?.length > 0 && (
               <>
                 <button
                   onClick={() => setIsModalOpen(true)}
@@ -128,7 +128,7 @@ const Banner = () => {
       </div>
 
       {/* Resume Modal */}
-      {isModalOpen && filterResume.length > 0 && filterResume[0].pdfUrl && (
+      {isModalOpen && filterResume?.length > 0 && filterResume[0].pdfUrl && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

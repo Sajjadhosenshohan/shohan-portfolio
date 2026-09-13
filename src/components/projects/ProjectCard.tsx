@@ -48,11 +48,30 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
               {project?.title}
             </h3>
 
-            <p className="text-sm mb-4 line-clamp-2" style={{ opacity: 0.8 }}>
+            <p className="text-sm mb-3 line-clamp-2" style={{ opacity: 0.8 }}>
               {project?.description}
             </p>
 
-            {/* Technologies tags similar to blog section */}
+            {/* Project Tags */}
+            {project?.tags && project.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {project.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="inline-block text-xs px-2 py-0.5 rounded-full"
+                    style={{
+                      background: "rgba(59, 130, 246, 0.1)",
+                      border: "1px solid rgba(59, 130, 246, 0.3)",
+                      color: "#3b82f6",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Technologies tags */}
             <div className="flex flex-wrap gap-2 mb-4 mt-auto">
               {project?.technologies?.slice(0, 3)?.map((tech, idx) => (
                 <span
@@ -83,19 +102,23 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
 
             <div className="flex justify-between items-center pt-4 border-t mt-auto">
               <div className="flex gap-2">
-                <Link
-                  href={project?.client_link || ""}
-                  target="_blank"
-                  className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-md transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <Code2 className="h-3 w-3" style={{ color: "#f72585" }} />
-                  <span>Frontend code</span>
-                </Link>
+                {/* Only show Frontend code link if client_link exists */}
+                {project?.client_link && (
+                  <Link
+                    href={project.client_link}
+                    target="_blank"
+                    className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-md transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Code2 className="h-3 w-3" style={{ color: "#f72585" }} />
+                    <span>Frontend code</span>
+                  </Link>
+                )}
 
+                {/* Only show Backend code link if server_link exists */}
                 {project?.server_link && (
                   <Link
-                    href={project?.server_link || ""}
+                    href={project.server_link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded-md transition-colors"
@@ -107,20 +130,22 @@ const ProjectCard = ({ project, onClick }: ProjectCardProps) => {
                 )}
               </div>
 
-              <Link
-                href={project?.live_link || ""}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-3 py-1 text-xs rounded-md transition-colors hover:opacity-80"
-                style={{
-                  background: "#f72585",
-                  color: "white",
-                }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ExternalLink className="h-3 w-3" />
-                Demo
-              </Link>
+              {project?.live_link && (
+                <Link
+                  href={project.live_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 px-3 py-1 text-xs rounded-md transition-colors hover:opacity-80"
+                  style={{
+                    background: "#f72585",
+                    color: "white",
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <ExternalLink className="h-3 w-3" />
+                  Demo
+                </Link>
+              )}
             </div>
           </div>
         </div>

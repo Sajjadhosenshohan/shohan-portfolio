@@ -10,6 +10,14 @@ import { MagicCard } from "../magicui/magic-card";
 import { motion, AnimatePresence } from "framer-motion";
 import DOMPurify from "dompurify";
 
+// Helper to extract YouTube video ID
+function getYouTubeId(url: string): string | null {
+  const match = url.match(
+    /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/
+  );
+  return match ? match[1] : null;
+}
+
 export default function BlogSection() {
   const [selectedBlog, setSelectedBlog] = useState<TBlog | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -267,11 +275,32 @@ export default function BlogSection() {
                       />
                     </div>
 
-                    {/* Description */}
+                    {/* Video embed - only show if video_url exists */}
+                    {selectedBlog.video_url && (
+                      <div className="mb-6">
+                        {getYouTubeId(selectedBlog.video_url) ? (
+                          <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${getYouTubeId(selectedBlog.video_url)}`}
+                              title="Video"
+                              allowFullScreen
+                              className="absolute inset-0 w-full h-full"
+                            />
+                          </div>
+                        ) : (
+                          <video
+                            src={selectedBlog.video_url}
+                            controls
+                            className="w-full rounded-lg"
+                          />
+                        )}
+                      </div>
+                    )}
+
+                    {/* Description - ONLY as rich text, no duplicate plain text */}
                     <div className="mb-6">
-                      <p className="text-base leading-relaxed opacity-90">{selectedBlog.short_description}</p>
                       <div
-                        className="text-sm  prose prose-sm prose-headings:font-medium prose-a:text-blue-600 max-w-none"
+                        className="prose prose-sm md:prose-base prose-headings:font-semibold prose-a:text-blue-600 prose-strong:font-bold prose-p:leading-relaxed max-w-none"
                         dangerouslySetInnerHTML={{
                           __html: sanitizeHtml(selectedBlog?.short_description)
                         }}
@@ -318,16 +347,6 @@ export default function BlogSection() {
 
                     {/* Author section */}
                     <div className="flex items-center gap-4 pt-4 border-t">
-                      {/* {selectedBlog?.author?.profile_image && (
-                        <div className="relative h-12 w-12 rounded-full overflow-hidden flex-shrink-0">
-                          <Image
-                            src={selectedBlog?.author?.profile_image || "/placeholder.svg"}
-                            alt={selectedBlog?.author?.name}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      )} */}
                       <div>
                         <div className="font-medium ">
                           {selectedBlog.author.name}

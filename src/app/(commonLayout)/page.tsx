@@ -1,5 +1,6 @@
 import AboutSection from "@/components/about";
 import EducationSection from "@/components/education";
+import ExperienceSection from "@/components/experience";
 import Banner from "@/components/views/Banner";
 import ContactPage from "./contact/page";
 import SkillsSection from "@/components/skills/SkillSection";
@@ -11,12 +12,11 @@ export default async function Home() {
     <div className="space-y-10">
       <Banner />
       <AboutSection />
-
+      <ExperienceSection />
       <SkillsSection />
-      
-      <ProjectSection/>
+      <ProjectSection />
       <EducationSection />
-      <BlogSection/>
+      <BlogSection />
       <ContactPage />
     </div>
   );

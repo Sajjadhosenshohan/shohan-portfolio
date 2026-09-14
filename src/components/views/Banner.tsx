@@ -10,6 +10,7 @@ import { getResume } from "@/services/GetAllService";
 import { motion } from "framer-motion";
 import { TResume } from "@/types/types";
 import { Download } from "lucide-react";
+import HeroSkillsParticles from "../banner/HeroSkillsParticles";
 
 const Banner = () => {
   useEffect(() => {
@@ -52,8 +53,11 @@ const Banner = () => {
 
   return (
     <CommonSection>
+      {/* Interactive Background Skills Particles & Constellation */}
+      <HeroSkillsParticles />
+
       {/* Banner Content */}
-      <div className="container mx-auto flex flex-col justify-between md:flex-row gap-10 items-center lg:h-auto overflow-hidden px-8 py-14 md:py-20">
+      <div className="container relative z-10 mx-auto flex flex-col justify-between md:flex-row gap-10 items-center lg:h-auto overflow-hidden px-8 py-14 md:py-20">
         {/* Left Section */}
         <div className="text-center md:text-left w-full lg:w-1/2">
           <h3

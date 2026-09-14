@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 const menuItems = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
+  { name: "Experience", path: "/experience" },
   { name: "Skills", path: "/skills" },
   { name: "Education", path: "/education" },
   { name: "Projects", path: "/projects" },

@@ -1,29 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
   <defs>
-    <linearGradient id="sGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a259ff" />
+    <!-- Background Gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a10" />
+      <stop offset="100%" stop-color="#171226" />
+    </linearGradient>
+
+    <!-- Main "S" Brand Gradient -->
+    <linearGradient id="sajjadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe" />
+      <stop offset="45%" stop-color="#a259ff" />
       <stop offset="100%" stop-color="#f72585" />
     </linearGradient>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f0f16" />
-      <stop offset="100%" stop-color="#1b172a" />
+
+    <!-- Border Glow Gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a259ff" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#f72585" stop-opacity="0.8" />
     </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
   </defs>
 
-  <!-- Squircle Base -->
-  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" stroke="url(#sGrad)" stroke-width="2.5" />
+  <!-- Squircle Rounded Container -->
+  <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#bgGradient)" stroke="url(#borderGrad)" stroke-width="3" />
 
-  <!-- Code Bracket Left -->
-  <path d="M 17 26 L 11 32 L 17 38" fill="none" stroke="#a259ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+  <!-- Subtle Inner Ring -->
+  <circle cx="64" cy="64" r="48" fill="none" stroke="rgba(162, 89, 255, 0.12)" stroke-width="1.5" stroke-dasharray="4 4" />
 
-  <!-- Code Bracket Right -->
-  <path d="M 47 26 L 53 32 L 47 38" fill="none" stroke="#f72585" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
-
-  <!-- Central "S" Monogram -->
-  <path d="M 37 22 C 27 20 23 27 27 31 C 32 35 41 33 40 40 C 39 46 29 46 25 42" 
+  <!-- Stylized Geometric "S" for SAJJAD -->
+  <!-- Top Arc of S -->
+  <path d="M 86 42 
+           C 86 31, 74 24, 60 25 
+           C 44 26, 36 36, 38 48 
+           C 40 60, 52 64, 66 68 
+           C 82 72, 92 78, 90 92 
+           C 88 105, 74 111, 58 110 
+           C 42 109, 34 100, 34 90" 
         fill="none" 
-        stroke="url(#sGrad)" 
-        stroke-width="5" 
+        stroke="url(#sajjadGrad)" 
+        stroke-width="14" 
         stroke-linecap="round" 
-        stroke-linejoin="round" />
+        stroke-linejoin="round" 
+        filter="url(#neonGlow)" />
+
+  <!-- Accent Tech Dots -->
+  <circle cx="86" cy="42" r="4" fill="#00f2fe" />
+  <circle cx="34" cy="90" r="4" fill="#f72585" />
 </svg>
